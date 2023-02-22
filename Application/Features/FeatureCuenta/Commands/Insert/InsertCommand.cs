@@ -1,10 +1,9 @@
 ﻿using MediatR;
 
-namespace Application.Features.FeatureCuenta.Commands.Update
+namespace Application.Features.FeatureCuenta.Commands.Insert
 {
-    public class UpdateCommand : IRequest
+    public class InsertCommand : IRequest
     {
-        public long Id { get; set; }
         public long NumeroCuenta { get; set; }
         public int TipoCuenta { get; set; }
         public decimal Saldo { get; set; }

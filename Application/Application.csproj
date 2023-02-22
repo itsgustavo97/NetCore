@@ -21,9 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\FeatureCuenta\Commands\Insert\" />
     <Folder Include="Features\FeatureCuenta\Commands\Delete\" />
-    <Folder Include="Features\FeatureTransferencia\Queries\" />
   </ItemGroup>
 
 </Project>

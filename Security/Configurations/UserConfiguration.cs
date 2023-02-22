@@ -14,23 +14,23 @@ namespace Security.Configurations
                     new ApplicationUser
                     {
                         Id = "f284b3fd-f2cf-476e-a9b6-6560689cc48c",
-                        Email = "admin@locahost.com",
-                        NormalizedEmail = "admin@locahost.com",
-                        Nombre = "Vaxi",
-                        UserName = "vaxidrez",
-                        NormalizedUserName = "vaxidrez",
-                        PasswordHash = hasher.HashPassword(null, "VaxiDrez2025$"),
+                        Email = "gtfofo97@gmail.com",
+                        NormalizedEmail = "gtfofo97@gmail.com",
+                        Nombre = "Gustavo Pineda",
+                        UserName = "itsgustavo97",
+                        NormalizedUserName = "itsgustavo97",
+                        PasswordHash = hasher.HashPassword(null, "ABCDabcd1234$"),
                         EmailConfirmed = true,
                     },
                     new ApplicationUser
                     {
                         Id = "294d249b-9b57-48c1-9689-11a91abb6447",
-                        Email = "juanperez@locahost.com",
-                        NormalizedEmail = "juanperez@locahost.com",
-                        Nombre = "Juan",
-                        UserName = "juanperez",
-                        NormalizedUserName = "juanperez",
-                        PasswordHash = hasher.HashPassword(null, "VaxiDrez2025$"),
+                        Email = "gustavofofo_97@outlook.com",
+                        NormalizedEmail = "gustavofofo_97@outlook.com",
+                        Nombre = "Adolfo Montes",
+                        UserName = "itsadolfo97",
+                        NormalizedUserName = "itsadolfo97",
+                        PasswordHash = hasher.HashPassword(null, "ABCDabcd1234$"),
                         EmailConfirmed = true,
                     }
 

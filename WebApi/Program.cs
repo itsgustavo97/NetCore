@@ -3,6 +3,7 @@ using Infrastructure;
 using Infrastructure.Persistencia;
 using Microsoft.EntityFrameworkCore;
 using Security;
+using Security.Persistencia;
 using WebApi.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -47,7 +48,10 @@ if (app.Environment.IsDevelopment())
 		{
 			var context = services.GetRequiredService<ApplicationDBContext>();
 			await context.Database.MigrateAsync();
-		}
+
+            //var SecurityContext = services.GetRequiredService<SecurityDBContext>();
+            //await context.Database.MigrateAsync();
+        }
 		catch (Exception ex)
 		{
 			var logger = loggerFactory.CreateLogger<Program>();

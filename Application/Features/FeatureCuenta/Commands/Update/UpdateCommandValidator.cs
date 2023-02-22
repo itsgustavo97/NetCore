@@ -1,9 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.FeatureCuenta.Commands.Update
 {
@@ -20,7 +15,7 @@ namespace Application.Features.FeatureCuenta.Commands.Update
             //Regla para Saldo de cuenta
             RuleFor(p => p.Saldo).NotNull().WithMessage("No puede ser nulo");
             RuleFor(p => p.Saldo).NotEmpty().WithMessage("No puede estar vacío");
-            RuleFor(p => p.Saldo).GreaterThanOrEqualTo(0).WithMessage("No puede menor o igual a $0");
+            RuleFor(p => p.Saldo).GreaterThan(0).WithMessage("Debe ser mayor a $0");
         }
     }
 }

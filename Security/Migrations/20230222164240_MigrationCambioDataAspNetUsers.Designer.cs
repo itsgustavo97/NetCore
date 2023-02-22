@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Security.Persistencia;
 
@@ -11,9 +12,10 @@ using Security.Persistencia;
 namespace Security.Migrations
 {
     [DbContext(typeof(SecurityDBContext))]
-    partial class SecurityDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230222164240_MigrationCambioDataAspNetUsers")]
+    partial class MigrationCambioDataAspNetUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -8,19 +8,19 @@ namespace Application.Features.FeatureCuenta.Queries.GetAll
 {
     public class GetAllQueryHandler : IRequestHandler<GetAllQuery, List<CuentaDto>>
     {
-        private readonly IUnitOfWork unitOfWork;
-        private readonly IMapper mapper;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
         public GetAllQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            this.unitOfWork = unitOfWork;
-            this.mapper = mapper;
+            this._unitOfWork = unitOfWork;
+            this._mapper = mapper;
         }
 
         public async Task<List<CuentaDto>> Handle(GetAllQuery request, CancellationToken cancellationToken)
         {
-            var list = await unitOfWork.genericRepository<Cuenta>().GetAllActiveAsync();
-            return mapper.Map<List<CuentaDto>>(list);
+            var list = await _unitOfWork.genericRepository<Cuenta>().GetAllActiveAsync();
+            return _mapper.Map<List<CuentaDto>>(list);
         }
     }
 }
