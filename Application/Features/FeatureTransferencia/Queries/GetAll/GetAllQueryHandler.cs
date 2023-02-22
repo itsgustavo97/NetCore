@@ -19,6 +19,9 @@ namespace Application.Features.FeatureTransferencia.Queries.GetAll
 
         public async Task<List<TransferenciaDto>> Handle(GetAllQuery request, CancellationToken cancellationToken)
         {
+            //TODO: hacer usp con Dapper
+            
+
             var list = await _unitOfWork.genericRepository<Transferencia>().GetAllActiveAsync();
             return _mapper.Map<List<TransferenciaDto>>(list);
         }
