@@ -9,21 +9,25 @@ namespace WebApi.Middleware
     {
         private readonly RequestDelegate _next;
         private readonly IHostEnvironment _environment;
+        private readonly ILogger<ExceptionMiddleware> _logger;
 
-        public ExceptionMiddleware(RequestDelegate next, IHostEnvironment environment)
+        public ExceptionMiddleware(RequestDelegate next, IHostEnvironment environment, ILogger<ExceptionMiddleware> _logger)
         {
             _next = next;
             _environment = environment;
+            this._logger = _logger;
         }
 
         public async Task InvokeAsync(HttpContext context)
         {
             try
             {
+                _logger.LogInformation("Se ejecutó un endpoint");
                 await _next(context);
             }
             catch (Exception ex)
             {
+                _logger.LogError($"Ocurrió un error en el invoke: {ex.Message}");
                 context.Response.ContentType = "Application/json";
                 var statusCode = (int) HttpStatusCode.InternalServerError;
                 var result = string.Empty;

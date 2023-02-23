@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Application.Features.FeatureTransferencia.Queries.GetAll
 {
-    public class GetAllQueryHandler : IRequestHandler<GetAllQuery, List<TransferenciaDto>>
+    public class GetAllQueryHandler : IRequestHandler<GetAllQuery, IEnumerable<TransferenciaDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -17,13 +17,12 @@ namespace Application.Features.FeatureTransferencia.Queries.GetAll
             this._mapper = mapper;
         }
 
-        public async Task<List<TransferenciaDto>> Handle(GetAllQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<TransferenciaDto>> Handle(GetAllQuery request, CancellationToken cancellationToken)
         {
-            //TODO: hacer usp con Dapper
-            
-
-            var list = await _unitOfWork.genericRepository<Transferencia>().GetAllActiveAsync();
-            return _mapper.Map<List<TransferenciaDto>>(list);
+            var transfers = await _unitOfWork.RepositoryTransferencia.GetAllAsync(request.Id);
+            return _mapper.Map<IEnumerable<TransferenciaDto>>(transfers);
+            //var list = await _unitOfWork.genericRepository<Transferencia>().GetAllActiveAsync();
+            //return _mapper.Map<List<TransferenciaDto>>(list);
         }
     }
 }

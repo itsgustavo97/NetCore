@@ -8,6 +8,9 @@ namespace Domain.ModelBase
         public long Id { get; set; }
         [Required]
         public bool Borrado { get; set; }
+        //[Required]
+        //public string IdUsuarioCreo { get; set; }
+        //public string IdUsuarioModifico { get; set; }
         [Required]
         public DateTime FechaCreado { get; set; }
         public DateTime? FechaModificado { get; set; }

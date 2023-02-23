@@ -1,13 +1,10 @@
 ﻿using Application.Contracts.Infrastructure;
 using Domain.ModelBase;
 using Infrastructure.Persistencia;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore.Storage;
-using System;
+using Microsoft.Extensions.Configuration;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
@@ -15,16 +12,30 @@ namespace Infrastructure.Repositories
     {
         private readonly ApplicationDBContext db;
         private Hashtable repositories;
+        private readonly SqlConnection conn;
+        private readonly IConfiguration config;
+        private IFileStorage _fileStorage;
+        private IRepositoryTransferencia _irepositorioTransferencia;
 
-        public UnitOfWork(ApplicationDBContext db)
+        public UnitOfWork(ApplicationDBContext db, IConfiguration config)
         {
             this.db = db;
+            this.config = config;
+            conn = new SqlConnection(config.GetConnectionString("DBBanco"));
         }
+
+        public IRepositoryTransferencia RepositoryTransferencia => _irepositorioTransferencia ??= new RepositoryTransferencia(conn);
+        //public IFileStorage FileStorage => _fileStorage ??= new RepositoryCloudFileStorage(config);
+        public IFileStorage FileStorage => _fileStorage ??= new RepositoryLocalFileStorage(config);
 
         public async Task<IDbContextTransaction> BeginTransactionAsync() =>
             await db.Database.BeginTransactionAsync();
 
-        public void Dispose() => db.Dispose();
+        public void Dispose()
+        {
+            db.Dispose();
+            conn.Dispose();
+        }
 
         public IRepositoryGeneric<T> genericRepository<T>() where T : BaseModel
         {

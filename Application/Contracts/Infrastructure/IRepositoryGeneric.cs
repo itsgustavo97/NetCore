@@ -1,4 +1,5 @@
-﻿using Domain.ModelBase;
+﻿using Application.Specification;
+using Domain.ModelBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,11 @@ namespace Application.Contracts.Infrastructure
         void Add(T entity);
 
         Task<IReadOnlyList<T>> GetAllActiveAsync();
+
+        Task<T> GetByIdWithSpecAsync(ISpecification<T> spec);
+
+        Task<IReadOnlyList<T>> GetAllWithSpecAsync(ISpecification<T> spec);
+
+        Task<int> CountAsync(ISpecification<T> spec);
     }
 }

@@ -1,12 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Contracts.Infrastructure;
+using Application.Exceptions;
+using Application.Models;
+using AutoMapper;
+using Domain;
+using MediatR;
 
 namespace Application.Features.FeatureTransferencia.Queries.GetById
 {
-    internal class GetByIdQueryHandler
+    public class GetByIdQueryHandler : IRequestHandler<GetByIdQuery, TransferenciaDto>
     {
+        private readonly IUnitOfWork unitOfWork;
+        private readonly IMapper mapper;
+
+        public GetByIdQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        {
+            this.unitOfWork = unitOfWork;
+            this.mapper = mapper;
+        }
+
+        public async Task<TransferenciaDto> Handle(GetByIdQuery request, CancellationToken cancellationToken)
+        {
+            var result = await unitOfWork.genericRepository<Transferencia>().GetByIdAsync(request.Id);
+            if (result == null)
+            {
+                throw new NotFoundException(nameof(Transferencia), request.Id);
+            }
+            return mapper.Map<TransferenciaDto>(result);
+        }
     }
 }

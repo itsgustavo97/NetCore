@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Models;
+using MediatR;
 
 namespace Application.Features.FeatureTransferencia.Queries.GetById
 {
-    internal class GetByIdQuery
+    public class GetByIdQuery : IRequest<TransferenciaDto>
     {
+        public long Id { get; set; }
+        public GetByIdQuery(long Id)
+        {
+            this.Id = Id;
+        }
     }
 }

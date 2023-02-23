@@ -10,6 +10,8 @@ namespace Application.Contracts.Infrastructure
 {
     public interface IUnitOfWork : IDisposable
     {
+        IRepositoryTransferencia RepositoryTransferencia { get; }
+        IFileStorage FileStorage { get; }
         IRepositoryGeneric<T> genericRepository<T>() where T : BaseModel;
         Task<int> SaveChangesAsync();
         Task<IDbContextTransaction> BeginTransactionAsync();

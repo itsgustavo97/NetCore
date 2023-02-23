@@ -3,7 +3,6 @@ using Infrastructure;
 using Infrastructure.Persistencia;
 using Microsoft.EntityFrameworkCore;
 using Security;
-using Security.Persistencia;
 using WebApi.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +30,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseStaticFiles();
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors("politica");
 app.UseAuthentication();
@@ -44,8 +44,10 @@ if (app.Environment.IsDevelopment())
     {
         var services = scope.ServiceProvider;
 		var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+		var logger = loggerFactory.CreateLogger<Program>();
 		try
 		{
+			logger.LogInformation("Se está ejecutando migration");
 			var context = services.GetRequiredService<ApplicationDBContext>();
 			await context.Database.MigrateAsync();
 
@@ -54,7 +56,6 @@ if (app.Environment.IsDevelopment())
         }
 		catch (Exception ex)
 		{
-			var logger = loggerFactory.CreateLogger<Program>();
 			logger.LogError("Ocurrió un error: ",ex);
 		}
     }

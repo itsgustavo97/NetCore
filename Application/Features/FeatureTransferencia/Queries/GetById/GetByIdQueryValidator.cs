@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentValidation;
 
 namespace Application.Features.FeatureTransferencia.Queries.GetById
 {
-    internal class GetByIdQueryValidator
+    public class GetByIdQueryValidator : AbstractValidator<GetByIdQuery>
     {
+        public GetByIdQueryValidator()
+        {
+            RuleFor(p => p.Id).NotNull().WithMessage("no debe ser nulo");
+        }
     }
 }

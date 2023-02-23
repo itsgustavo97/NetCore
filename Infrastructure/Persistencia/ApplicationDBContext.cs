@@ -19,12 +19,14 @@ namespace Infrastructure.Persistencia
         {
             new CuentaConfig(builder.Entity<Cuenta>());
             new TransferenciaConfig(builder.Entity<Transferencia>());
+            new CuentaBloqueadaConfig(builder.Entity<CuentaBloqueada>());
 
             base.OnModelCreating(builder);
         }
 
         public DbSet<Cuenta> Cuenta { get; set; }
         public DbSet<Transferencia> Transferencia { get; set; }
+        public DbSet<CuentaBloqueada> CuentaBloqueada { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
